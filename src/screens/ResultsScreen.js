@@ -1,14 +1,31 @@
 import React, {useState, useEffect} from 'react';
-import { View, Text, StyleSheet, FlatList, Image} from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, Button, Image, Linking} from 'react-native';
 import recipePuppy from '../api/recipepuppy';
+import Spacer from '../components/Spacer';
 
 const ResultsScreen = ({navigation}) => {
     const cuisineText = navigation.getParam('cuisineInput');
     const ingredientsText = navigation.getParam('ingredientsInput');
     const [result,setResult] = useState([]);
 
-    const getResult = async (cuisineText) => {
+    function openURL(url){
+      return ( Linking.canOpenURL(url)
+      .then((supported) => {
+        if (!supported) {
+          console.log("Can't handle url: " + url);
+        } else {
+          return Linking.openURL(url);
+        }
+      })
+      .catch((err) => console.error('An error occurred', err)));
+    }
 
+    function parseDomainFromUrl(url){
+      let regEx = /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/img
+      return url.match(regEx)
+    }
+
+    const getResult = async (cuisineText) => {
         try{
           const response = await recipePuppy.get("/?p=1&i=" + ingredientsText + "&q=" + cuisineText);
 
@@ -40,7 +57,6 @@ const ResultsScreen = ({navigation}) => {
         return null;
       }
       else{
-
         let imageUri = "";
         if(result.thumbnail){
           imageUri = result.thumbnail;
@@ -49,25 +65,46 @@ const ResultsScreen = ({navigation}) => {
           imageUri = "../assets/errorNoFoodThumbnail.jpg";
         }
 
+        let parsedUrl = "";
+        if(result.href){
+          parsedUrl = parseDomainFromUrl(result.href);
+        }
+
         return (
             <View>
-              <Text>{result.title}</Text>
+              <Text style={styles.title}>{result.title}</Text>
               {result.thumbnail
                   ? <Image
                     source={{uri: result.thumbnail}} 
                     style={styles.image} 
                     />
                   : <Image
-                  source={require('../assets/errorNoFoodThumbnail.jpg')}
+                    source={require('../assets/errorNoFoodThumbnail.jpg')}
                     style={styles.image} 
                     />
                 }
-                <Text>The Cuisine you entered is {cuisineText}</Text>
-                <Text>The Ingredient you entered is {ingredientsText}</Text>
-                <Text>The result href is {result.href}</Text>
-                <Text>The result ingredients is {result.ingredients}</Text>
-                <Text>The result thumbnail is {result.thumbnail}</Text>
-                <Text style={styles.text}>{result.name}</Text>
+                <Text style={styles.imageSubtext}>Source: {parsedUrl}</Text>
+                <Text style={styles.text}>Ingredients: {result.ingredients}</Text>
+                <Spacer>
+                  <Button
+                    title="See recipe"
+                    onPress={() =>  openURL(result.href)}
+                  />
+                </Spacer>
+                <View style={styles.bottomRowButtons}>
+                  <Spacer>
+                    <Button
+                      title="Next recipe"
+                      onPress={() => getResult(cuisineText)}
+                    />
+                  </Spacer>
+                  <Spacer>
+                    <Button
+                      title="Back"
+                      onPress={ () => navigation.pop()}
+                    />
+                  </Spacer>
+                </View>
             </View>
           );
       }
@@ -79,15 +116,38 @@ const styles = StyleSheet.create ({
       justifyContent: 'center',
       flex:1
     },
+    title: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      textAlign: "center",
+      fontSize: 18,
+      paddingTop:30,
+      paddingBottom:30,
+      fontWeight: 'bold'
+    },
     image: {
+      alignSelf: 'center',
       height:175,
       width:175,
     },
-    text: {
-      fontWeight:'bold',
-      fontSize: 25,
+    imageSubtext:{
+      alignItems: 'center',
+      justifyContent: 'center',
       textAlign: "center",
-      paddingBottom:20
+      fontSize: 12,
+      paddingTop:10,
+      paddingBottom:40,
+    },
+    text: {
+      fontSize: 15,
+      textAlign: "center",
+      paddingBottom:20,
+    },
+    bottomRowButtons: {
+      flexDirection:"row",
+      alignItems: 'center',
+      justifyContent: 'center',
+      textAlign: "center",
     },
   });
 
