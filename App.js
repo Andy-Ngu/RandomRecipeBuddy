@@ -11,7 +11,9 @@ const navigator = createStackNavigator(
   {
   initialRouteName: 'Search',
   defaultNavigationOptions: {
-    title: 'Home'
+    title: 'Home',
+    headerMode: 'none',
+    headerShown: false
     }
   });
 
