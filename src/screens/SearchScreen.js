@@ -1,21 +1,20 @@
-import React, {useContext} from 'react';
-import {View, StyleSheet, Text } from 'react-native';
+import React from 'react';
+import {StyleSheet } from 'react-native';
 import UserFoodInput from '../components/UserFoodInput';
-//import {Context as AuthContext} from '../context/AuthContext';
+import {SafeAreaView } from 'react-native-safe-area-context';
 
 const SearchScreen = ({navigation}) => {
-    //const { state, getData} = useContext(AuthContext);
     return (
-        <View style={styles.container}>
+        <SafeAreaView>
             <UserFoodInput
                 cuisineText = "Enter a cuisine"
                 ingredientsText = "Enter ingredients"
                 submitButtonText = "Go"
             />
-        </View>);
+        </SafeAreaView>
+        );
 };
 
-//onSubmit = {getData}
 const styles = StyleSheet.create({});
 
 export default SearchScreen;
