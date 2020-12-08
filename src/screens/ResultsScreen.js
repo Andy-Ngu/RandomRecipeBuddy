@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import { View, Text, StyleSheet, SafeAreaView, Button, Image, Linking} from 'react-native';
+import { View, Text, StyleSheet, Button, Image, Linking} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import recipePuppy from '../api/recipepuppy';
 import Spacer from '../components/Spacer';
 
@@ -22,14 +23,30 @@ const ResultsScreen = ({navigation}) => {
 
     function parseDomainFromUrl(url){
       let regEx = /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/img
-      return url.match(regEx)
+      return url.match(regEx);
+    }
+
+    function trimWordsFromUrl(url){
+      url = url + "";
+      url = url.replace("http://", "");
+      url = url.replace("https://", "");
+      url = url.replace("www.", "");
+      return capitalizeFirstLetterInWord(url);
+    }
+
+    function capitalizeFirstLetterInWord(s){
+      return s[0].toUpperCase() + s.slice(1);
+    }
+
+    function cleanUrl(url){
+      url = capitalizeFirstLetterInWord(trimWordsFromUrl(parseDomainFromUrl(url)));
+      return url;
     }
 
     const getResult = async (cuisineText) => {
         try{
           const response = await recipePuppy.get("/?p=1&i=" + ingredientsText + "&q=" + cuisineText);
 
-          // recheck logic later
           let resultsTotal = response.data.results.length;
           let randomNumber = 0;
           if(resultsTotal >= 1){
@@ -67,11 +84,11 @@ const ResultsScreen = ({navigation}) => {
 
         let parsedUrl = "";
         if(result.href){
-          parsedUrl = parseDomainFromUrl(result.href);
+          parsedUrl = cleanUrl(result.href);
         }
 
         return (
-            <View>
+            <SafeAreaView>
               <Text style={styles.title}>{result.title}</Text>
               {result.thumbnail
                   ? <Image
@@ -83,7 +100,7 @@ const ResultsScreen = ({navigation}) => {
                     style={styles.image} 
                     />
                 }
-                <Text style={styles.imageSubtext}>Source: {parsedUrl}</Text>
+                <Text style={styles.imageSubtext}>From: {parsedUrl}</Text>
                 <Text style={styles.text}>Ingredients: {result.ingredients}</Text>
                 <Spacer>
                   <Button
@@ -105,7 +122,7 @@ const ResultsScreen = ({navigation}) => {
                     />
                   </Spacer>
                 </View>
-            </View>
+            </SafeAreaView>
           );
       }
 };
