@@ -86,19 +86,16 @@ const ResultsScreen = ({navigation}) => {
         return null;
       }
       else{
-        let imageUri = "";
-        let ingredientsList = "";
+        let imageUri, ingredientsList, parsedUrl = "";
         if(result.thumbnail){
           imageUri = result.thumbnail;
         }
         else{
           imageUri = "../assets/errorNoFoodThumbnail.jpg";
         }
-
-        let parsedUrl = "";
         if(result.href){
           parsedUrl = cleanUrl(result.href);
-          ingredientsList = replaceLastWordOccurance(cleanIngredientsList(result.ingredients), ",", " and");
+          ingredientsList = replaceLastWordOccurance(cleanIngredientsList(result.ingredients), ",", ", and");
         }
 
         return (
@@ -160,7 +157,7 @@ const styles = StyleSheet.create ({
       fontWeight: 'bold',
       letterSpacing: 1.5,
       color: '#F3FDFB',
-      fontFamily: '"sans-serif-thin", sans-serif'
+      fontFamily: 'sans-serif-thin'
     },
     image: {
       alignSelf: 'center',
