@@ -13,7 +13,8 @@ const navigator = createStackNavigator(
   defaultNavigationOptions: {
     title: 'Home',
     headerMode: 'none',
-    headerShown: false
+    headerShown: false,
+    cardStyle: { backgroundColor: '#9298D6' },
     }
   });
 
