@@ -43,6 +43,18 @@ const ResultsScreen = ({navigation}) => {
       return url;
     }
 
+    function cleanIngredientsList(text){
+      text = capitalizeFirstLetterInWord(text);
+      return text;
+    }
+
+    function replaceLastWordOccurance(text, WordToReplace, ReplaceWithWord){
+      text = text + "";
+      let lastIndex = text.lastIndexOf(WordToReplace);
+      text = text.substring(0, lastIndex) + ReplaceWithWord + text.substr(lastIndex + 1);
+      return text;
+    }
+
     const getResult = async (cuisineText) => {
         try{
           const response = await recipePuppy.get("/?p=1&i=" + ingredientsText + "&q=" + cuisineText);
@@ -75,6 +87,7 @@ const ResultsScreen = ({navigation}) => {
       }
       else{
         let imageUri = "";
+        let ingredientsList = "";
         if(result.thumbnail){
           imageUri = result.thumbnail;
         }
@@ -85,6 +98,7 @@ const ResultsScreen = ({navigation}) => {
         let parsedUrl = "";
         if(result.href){
           parsedUrl = cleanUrl(result.href);
+          ingredientsList = replaceLastWordOccurance(cleanIngredientsList(result.ingredients), ",", " and");
         }
 
         return (
@@ -101,7 +115,8 @@ const ResultsScreen = ({navigation}) => {
                     />
                 }
                 <Text style={styles.imageSubtext}>From: {parsedUrl}</Text>
-                <Text style={styles.text}>Ingredients: {result.ingredients}</Text>
+                <Text style={styles.text}>Ingredients:</Text>
+                <Text style={styles.subtext}>{ingredientsList}</Text>
                 <Spacer>
                   <Button
                     title="See recipe"
@@ -137,15 +152,24 @@ const styles = StyleSheet.create ({
       alignItems: 'center',
       justifyContent: 'center',
       textAlign: "center",
-      fontSize: 18,
+      fontSize: 25,
       paddingTop:30,
       paddingBottom:30,
-      fontWeight: 'bold'
+      paddingLeft:30,
+      paddingRight:30,
+      fontWeight: 'bold',
+      letterSpacing: 1.5,
+      color: '#F3FDFB',
+      fontFamily: '"sans-serif-thin", sans-serif'
     },
     image: {
       alignSelf: 'center',
-      height:175,
-      width:175,
+      height:150,
+      width:150,
+      borderRadius: 150 / 2,
+      overflow: "hidden",
+      borderWidth: 3,
+      borderColor: "white"
     },
     imageSubtext:{
       alignItems: 'center',
@@ -154,11 +178,28 @@ const styles = StyleSheet.create ({
       fontSize: 12,
       paddingTop:10,
       paddingBottom:40,
+      color: '#F3FDFB',
     },
     text: {
-      fontSize: 15,
-      textAlign: "center",
+      fontSize: 17,
+      textAlign: "left",
+      paddingBottom:10,
+      paddingLeft:30,
+      paddingRight:30,
+      textAlign: "auto",
+      letterSpacing: 1,
+      fontWeight: 'bold',
+      color: '#F3FDFB',
+    },
+    subtext: {
+      fontSize: 16,
+      textAlign: "left",
       paddingBottom:20,
+      paddingLeft:30,
+      paddingRight:30,
+      textAlign: "auto",
+      letterSpacing: 1,
+      color: '#F3FDFB',
     },
     bottomRowButtons: {
       flexDirection:"row",
