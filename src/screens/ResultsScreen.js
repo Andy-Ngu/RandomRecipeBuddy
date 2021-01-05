@@ -49,15 +49,26 @@ const ResultsScreen = ({navigation}) => {
     }
 
     function replaceLastWordOccurance(text, WordToReplace, ReplaceWithWord){
-      text = text + "";
-      let lastIndex = text.lastIndexOf(WordToReplace);
-      text = text.substring(0, lastIndex) + ReplaceWithWord + text.substr(lastIndex + 1);
+      let occuranceCount = findNumberOfOccurances(text, WordToReplace);
+      
+      if(occuranceCount === 1 && ReplaceWithWord === ', and') ReplaceWithWord = ' and';
+
+      if (occuranceCount > 0){
+        text = text + "";
+        let lastIndex = text.lastIndexOf(WordToReplace);
+        text = text.substring(0, lastIndex) + ReplaceWithWord + text.substr(lastIndex + 1);
+      }
+
       return text;
+    }
+
+    function findNumberOfOccurances(text, WordToReplace){
+      return text.split(WordToReplace).length - 1;
     }
 
     const getResult = async (cuisineText) => {
         try{
-          const response = await recipePuppy.get("/?p=1&i=" + ingredientsText + "&q=" + cuisineText);
+          const response = await recipePuppy.get("/?p=1&i=" + ingredientsText + "&q=" + cuisineText + '&onlyImages=1');
 
           let resultsTotal = response.data.results.length;
           let randomNumber = 0;
