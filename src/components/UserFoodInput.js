@@ -32,7 +32,7 @@ const UserFoodInput = ({ searchText, cuisineTitle, foodTitle, ingredientsTitle, 
                         <Ionicons name="ios-search"  style={styles.icon}/>
                 </TouchableOpacity>
             </View>
-            <ScrollView>
+            <ScrollView style={styles.scrollCategories}>
                 <CategoryList foodData={CuisineData} title={cuisineTitle}/>
                 <CategoryList foodData={FoodData} title={foodTitle}/>
                 <CategoryList foodData={IngredientData} title={ingredientsTitle}/>
@@ -42,6 +42,10 @@ const UserFoodInput = ({ searchText, cuisineTitle, foodTitle, ingredientsTitle, 
 };
 
 const styles = StyleSheet.create({
+    scrollCategories:{
+        height: '55%',
+        width: '100%',
+    },
     logo:{
         paddingTop: 20,
         marginTop: 15,
