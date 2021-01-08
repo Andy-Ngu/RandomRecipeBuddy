@@ -7,9 +7,10 @@ const SearchScreen = ({navigation}) => {
     return (
         <SafeAreaView>
             <UserFoodInput
-                cuisineText = "Enter a cuisine"
-                ingredientsText = "Enter ingredients"
-                submitButtonText = "Go"
+                searchText = "Search a cuisine, food or ingredient"
+                cuisineTitle = "Search by Cuisine"
+                foodTitle = "Search by Food"
+                ingredientsTitle = "Search by Ingredient"
             />
         </SafeAreaView>
         );

@@ -1,24 +1,26 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native'
-import {Text, Button, TextInput, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, ScrollView} from 'react-native'
+import {Text, Button, TextInput, View, TouchableOpacity, Image} from 'react-native';
 import {withNavigation} from 'react-navigation'
 import { Ionicons } from '@expo/vector-icons';
 import Spacer from '../components/Spacer';
+import CategoryList from '../components/CategoryList';
 
-const UserFoodInput = ({ cuisineText, ingredientsText, onSubmit, submitButtonText, navigation}) => {
+import { CuisineData } from '../data/CuisineData';
+import { FoodData } from '../data/FoodData';
+import { IngredientData } from '../data/IngredientData';
+
+const UserFoodInput = ({ searchText, cuisineTitle, foodTitle, ingredientsTitle, navigation}) => {
     const [cuisineInput, setCuisineInput] = useState('');
     const [ingredientsInput, setIngredientsInput] = useState('');
 
     return(
         <View>
-            <Spacer>
-                <Text style = {styles.title}>Random Recipe Buddy</Text>
-            </Spacer>
-            
+            <Image style={styles.logo} source={require('../assets/logo.png')}/>
             <View style={styles.searchBackground}>
                 <TextInput  
                     style={styles.userInput}
-                    placeholder={cuisineText}
+                    placeholder={searchText}
                     value = {cuisineInput}
                     onChangeText = {setCuisineInput}
                     autoCapitalize="none"
@@ -30,52 +32,32 @@ const UserFoodInput = ({ cuisineText, ingredientsText, onSubmit, submitButtonTex
                         <Ionicons name="ios-search"  style={styles.icon}/>
                 </TouchableOpacity>
             </View>
-
-            <Spacer>
-                <Text style = {styles.searchTitle}>Search by Cuisine</Text>
-            </Spacer>
-            <TextInput 
-                label = "Enter ingredients"
-                value = {ingredientsInput}
-                onChangeText = {setIngredientsInput}
-                autoCapitalize="none"
-                autoCorrect={false}
-            />
-
-            <Spacer>
-                <Text style = {styles.searchTitle}>Search by ingredient</Text>
-            </Spacer>
-            
-            <TextInput 
-                label = "Enter ingredients"
-                value = {ingredientsInput}
-                onChangeText = {setIngredientsInput}
-                autoCapitalize="none"
-                autoCorrect={false}
-            />
+            <ScrollView>
+                <CategoryList foodData={CuisineData} title={cuisineTitle}/>
+                <CategoryList foodData={FoodData} title={foodTitle}/>
+                <CategoryList foodData={IngredientData} title={ingredientsTitle}/>
+            </ScrollView>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    title:{
-        paddingTop: 10,
+    logo:{
+        paddingTop: 20,
+        marginTop: 15,
+        marginBottom: 15,
         alignSelf: 'center',
-        fontSize: 20,
-    },
-    searchTitle:{
-        paddingTop: 10,
-        fontSize: 16,
-        paddingLeft: 10,
+        width: 325,
+        height: 150,
     },
     searchBackground: {
-        marginTop:12,
+        marginTop:15,
         backgroundColor: '#F0EEEE',
         height: 60,
         borderRadius: 5,
         marginHorizontal:15,
         flexDirection: 'row',
-        marginBottom: 10
+        marginBottom: 30
     },
     searchButton:{
         backgroundColor:'#98D692',
