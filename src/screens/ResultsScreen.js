@@ -3,68 +3,12 @@ import { View, Text, StyleSheet, Button, Image, Linking} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import recipePuppy from '../api/recipepuppy';
 import Spacer from '../components/Spacer';
+import { cleanUrl, openURL, cleanIngredientsList, replaceLastWordOccurance} from '../helper/utility';
 
 const ResultsScreen = ({navigation}) => {
     const cuisineText = navigation.getParam('cuisineInput');
     const ingredientsText = navigation.getParam('ingredientsInput');
     const [result,setResult] = useState([]);
-
-    function openURL(url){
-      return ( Linking.canOpenURL(url)
-      .then((supported) => {
-        if (!supported) {
-          console.log("Can't handle url: " + url);
-        } else {
-          return Linking.openURL(url);
-        }
-      })
-      .catch((err) => console.error('An error occurred', err)));
-    }
-
-    function parseDomainFromUrl(url){
-      let regEx = /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/img
-      return url.match(regEx);
-    }
-
-    function trimWordsFromUrl(url){
-      url = url + "";
-      url = url.replace("http://", "");
-      url = url.replace("https://", "");
-      url = url.replace("www.", "");
-      return capitalizeFirstLetterInWord(url);
-    }
-
-    function capitalizeFirstLetterInWord(s){
-      return s[0].toUpperCase() + s.slice(1);
-    }
-
-    function cleanUrl(url){
-      url = capitalizeFirstLetterInWord(trimWordsFromUrl(parseDomainFromUrl(url)));
-      return url;
-    }
-
-    function cleanIngredientsList(text){
-      text = capitalizeFirstLetterInWord(text);
-      return text;
-    }
-
-    function replaceLastWordOccurance(text, WordToReplace, ReplaceWithWord){
-      let occuranceCount = findNumberOfOccurances(text, WordToReplace);
-      
-      if(occuranceCount === 1 && ReplaceWithWord === ', and') ReplaceWithWord = ' and';
-
-      if (occuranceCount > 0){
-        text = text + "";
-        let lastIndex = text.lastIndexOf(WordToReplace);
-        text = text.substring(0, lastIndex) + ReplaceWithWord + text.substr(lastIndex + 1);
-      }
-
-      return text;
-    }
-
-    function findNumberOfOccurances(text, WordToReplace){
-      return text.split(WordToReplace).length - 1;
-    }
 
     const getResult = async (cuisineText) => {
         try{
@@ -87,67 +31,59 @@ const ResultsScreen = ({navigation}) => {
         }
       };
 
-    console.log(result);
-    console.log(typeof result);
     useEffect(() => {
         getResult(cuisineText);
     }, []);
 
+    let ingredientsList, parsedUrl = "";
     if(!result){
         return null;
       }
-      else{
-        let imageUri, ingredientsList, parsedUrl = "";
-        if(result.thumbnail){
-          imageUri = result.thumbnail;
-        }
-        else{
-          imageUri = "../assets/errorNoFoodThumbnail.jpg";
-        }
-        if(result.href){
-          parsedUrl = cleanUrl(result.href);
-          ingredientsList = replaceLastWordOccurance(cleanIngredientsList(result.ingredients), ",", ", and");
-        }
-
-        return (
-            <SafeAreaView>
-              <Text style={styles.title}>{result.title}</Text>
-              {result.thumbnail
-                  ? <Image
-                    source={{uri: result.thumbnail}} 
-                    style={styles.image} 
-                    />
-                  : <Image
-                    source={require('../assets/errorNoFoodThumbnail.jpg')}
-                    style={styles.image} 
-                    />
-                }
-                <Text style={styles.imageSubtext}>From: {parsedUrl}</Text>
-                <Text style={styles.text}>Ingredients:</Text>
-                <Text style={styles.subtext}>{ingredientsList}</Text>
-                <Spacer>
-                  <Button
-                    title="See recipe"
-                    onPress={() =>  openURL(result.href)}
-                  />
-                </Spacer>
-                <View style={styles.bottomRowButtons}>
-                  <Spacer>
-                    <Button
-                      title="Next recipe"
-                      onPress={() => getResult(cuisineText)}
-                    />
-                  </Spacer>
-                  <Spacer>
-                    <Button
-                      title="Back"
-                      onPress={ () => navigation.pop()}
-                    />
-                  </Spacer>
-                </View>
-            </SafeAreaView>
-          );
+    else{
+      if(result.href){
+        parsedUrl = cleanUrl(result.href);
+        ingredientsList = replaceLastWordOccurance(cleanIngredientsList(result.ingredients), ",", ", and");
       }
+
+      return (
+        <SafeAreaView>
+          <Text style={styles.title}>{result.title}</Text>
+          {result.thumbnail
+              ? <Image
+                source={{uri: result.thumbnail}} 
+                style={styles.image} 
+                />
+              : <Image
+                source={require('../assets/errorNoFoodThumbnail.jpg')}
+                style={styles.image} 
+                />
+            }
+            <Text style={styles.imageSubtext}>From: {parsedUrl}</Text>
+            <Text style={styles.text}>Ingredients:</Text>
+            <Text style={styles.subtext}>{ingredientsList}</Text>
+            <Spacer>
+              <Button
+                title="See recipe"
+                onPress={() =>  openURL(result.href)}
+              />
+            </Spacer>
+            <View style={styles.bottomRowButtons}>
+              <Spacer>
+                <Button
+                  title="Next recipe"
+                  onPress={() => getResult(cuisineText)}
+                />
+              </Spacer>
+              <Spacer>
+                <Button
+                  title="Back"
+                  onPress={ () => navigation.pop()}
+                />
+              </Spacer>
+            </View>
+        </SafeAreaView>
+      );
+    }
 };
 
 const styles = StyleSheet.create ({
