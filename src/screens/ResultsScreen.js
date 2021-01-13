@@ -11,16 +11,12 @@ const ResultsScreen = ({navigation}) => {
 
   const getResult = async (cuisineText) => {
       try{
-        const response = await recipePuppy.get("/?p=1&i=" + ingredientsText + "&q=" + cuisineText + '&onlyImages=1');
+        const response = await recipePuppy.get("/?i=" + ingredientsText + "&q=" + cuisineText + '&onlyImages=1');
         let resultsTotal = response.data.results.length;
-        let randomNumber = 0;
-        if(resultsTotal >= 1){
-          randomNumber = Math.floor(Math.random() * response.data.results.length); 
-        }
-        else{
-          randomNumber = 0
-        }
-        setResult(response.data.results[randomNumber]);
+        let randNumber = resultsTotal >= 1
+          ? randNumber = Math.floor(Math.random() * response.data.results.length)
+          : randNumber = 0
+        setResult(response.data.results[randNumber]);
       }
       catch (err){
         setErrorMessage('Something went wrong');
@@ -32,10 +28,10 @@ const ResultsScreen = ({navigation}) => {
   }, []);
 
   if(!result){
-    return (<DisplayResults result={EmptyData} cuisineText={cuisineText}/>)
+    return (<DisplayResults result={EmptyData} cuisineText={cuisineText} navigation={navigation} getResult={getResult}/>)
     }
   else{
-    return (<DisplayResults result={result} cuisineText={cuisineText}/>)
+    return (<DisplayResults result={result} cuisineText={cuisineText} navigation={navigation} getResult={getResult}/>)
   }
 };
 

@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
-import { View, Text, StyleSheet, Button, Image, Linking} from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, Button, Image} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Spacer from '../components/Spacer';
 import { cleanUrl, openURL, replaceLastWordOccurance, cleanIngredientsList} from '../helper/utility';
 
-const DisplayResults = ({result, cuisineText, navigation}) => {
+const DisplayResults = ({result, cuisineText, navigation, getResult}) => {
   let ingredientsList, parsedUrl = "";
   if(result.href){
     parsedUrl = cleanUrl(result.href);
