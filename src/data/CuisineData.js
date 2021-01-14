@@ -3,7 +3,7 @@ export const CuisineData = [
     id: '1',
     foodName: 'American',
     imageUrl: 'https://i.imgur.com/5MIMF4d.jpg',
-    ingredients: ''
+    ingredients: 'burgers%2C+steak%2C'
   },
   {
     id: '2',
@@ -55,7 +55,7 @@ export const CuisineData = [
   },
   {
     id: '10',
-    foodName: 'VietfoodNamese',
+    foodName: 'Vietnamese',
     imageUrl: 'https://i.imgur.com/5MIMF4d.jpg',
     ingredients: ''
   },
