@@ -28,16 +28,18 @@ const DisplayResults = ({result, cuisineText, navigation, getResult}) => {
             ? <Text style={styles.imageSubtext}>From: {parsedUrl}</Text>
             : <Text style={styles.imageSubtext}></Text>}
           {result.ingredients 
-            ? <Text style={styles.text}>Ingredients:</Text>
-            : <Text style={styles.text}></Text>}
-          <Text style={styles.subtext}>{ingredientsList}</Text>
-          <Spacer>
-            <Button
-              title="See recipe"
-              onPress={() =>  openURL(result.href)}
-            />
-          </Spacer>
-          <View style={styles.bottomRowButtons}>
+            ? <Text style={styles.ingredientsHeading}>Ingredients:</Text>
+            : <Text style={styles.ingredientsHeading}></Text>}
+          <Text numberOfLines={4} ellipsizeMode='tail' style={styles.ingredientsBody}>{ingredientsList}</Text>
+          <View style={styles.buttonsRowOne}>
+            <Spacer>
+              <Button 
+                title="See recipe"
+                onPress={() =>  openURL(result.href)}
+              />
+            </Spacer>
+          </View>
+          <View style={styles.buttonsRowTwo}>
             <Spacer>
               <Button
                 title="Next recipe"
@@ -59,30 +61,32 @@ const styles = StyleSheet.create ({
     parentView:{
       alignItems: 'center',
       justifyContent: 'center',
-      flex:1
+      flex:0,
     },
     title: {
       alignItems: 'center',
       justifyContent: 'center',
       textAlign: "center",
       fontSize: 25,
-      paddingTop:30,
-      paddingBottom:30,
+      paddingTop:20,
+      paddingBottom:20,
       paddingLeft:30,
       paddingRight:30,
       fontWeight: 'bold',
-      letterSpacing: 1.5,
+      letterSpacing: 0.8,
       color: '#F3FDFB',
-      fontFamily: 'sans-serif-thin'
+      fontFamily: 'sans-serif-light',
+      textTransform: 'capitalize',
+      height: '21%',
     },
     image: {
       alignSelf: 'center',
-      height:150,
-      width:150,
+      height:'22%',
+      width:'40%',
       borderRadius: 150 / 2,
       overflow: "hidden",
       borderWidth: 3,
-      borderColor: "white"
+      borderColor: "white",
     },
     imageSubtext:{
       alignItems: 'center',
@@ -90,31 +94,43 @@ const styles = StyleSheet.create ({
       textAlign: "center",
       fontSize: 12,
       paddingTop:10,
-      paddingBottom:40,
       color: '#F3FDFB',
+      fontFamily: 'sans-serif',
+      height:'5%',
     },
-    text: {
-      fontSize: 17,
+    ingredientsHeading: {
+      fontSize: 16,
       textAlign: "left",
       paddingBottom:10,
+      paddingTop:22,
       paddingLeft:30,
       paddingRight:30,
       textAlign: "auto",
       letterSpacing: 1,
       fontWeight: 'bold',
       color: '#F3FDFB',
+      fontFamily: 'sans-serif-light',
+      height:'9%',
     },
-    subtext: {
+    ingredientsBody: {
       fontSize: 16,
       textAlign: "left",
       paddingBottom:20,
       paddingLeft:30,
       paddingRight:30,
       textAlign: "auto",
-      letterSpacing: 1,
+      letterSpacing: 0.6,
       color: '#F3FDFB',
+      fontFamily: 'sans-serif-light',
+      height:'16.5%',
     },
-    bottomRowButtons: {
+    buttonsRowOne: {
+      flexDirection:"row",
+      alignItems: 'center',
+      justifyContent: 'center',
+      textAlign: "center",
+    },
+    buttonsRowTwo: {
       flexDirection:"row",
       alignItems: 'center',
       justifyContent: 'center',
