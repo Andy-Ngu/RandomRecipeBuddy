@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button, Image} from 'react-native';
+import { View, Text, StyleSheet, Image} from 'react-native';
+import { Button } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Spacer from '../components/Spacer';
 import { cleanUrl, openURL, replaceLastWordOccurance, cleanIngredientsList} from '../helper/utility';
@@ -31,26 +32,23 @@ const DisplayResults = ({result, cuisineText, navigation, getResult}) => {
             ? <Text style={styles.ingredientsHeading}>Ingredients:</Text>
             : <Text style={styles.ingredientsHeading}></Text>}
           <Text numberOfLines={4} ellipsizeMode='tail' style={styles.ingredientsBody}>{ingredientsList}</Text>
-          <View style={styles.buttonsRowOne}>
+          <View style={styles.buttonsRow}>
             <Spacer>
-              <Button 
-                title="See recipe"
-                onPress={() =>  openURL(result.href)}
-              />
+              <Button style={styles.buttonsPrimary}icon="send" mode="contained"  onPress={() =>  openURL(result.href)}>
+                See Recipe
+              </Button>
             </Spacer>
           </View>
-          <View style={styles.buttonsRowTwo}>
+          <View style={styles.buttonsRow}>
             <Spacer>
-              <Button
-                title="Next recipe"
-                onPress={() => getResult(cuisineText)}
-              />
+              <Button style={styles.buttonsSecondary} accessibilityLabel="Back" icon="arrow-left" mode="contained" onPress={ () => navigation.pop()}>
+                Back
+              </Button>
             </Spacer>
             <Spacer>
-              <Button
-                title="Back"
-                onPress={ () => navigation.pop()}
-              />
+              <Button style={styles.buttonsSecondary} accessibilityLabel="Next" icon="arrow-right" mode="contained" onPress={() => getResult(cuisineText)}>
+                Next
+              </Button>
             </Spacer>
           </View>
       </SafeAreaView>
@@ -69,9 +67,9 @@ const styles = StyleSheet.create ({
       textAlign: "center",
       fontSize: 25,
       paddingTop:20,
+      paddingRight:30,
       paddingBottom:20,
       paddingLeft:30,
-      paddingRight:30,
       fontWeight: 'bold',
       letterSpacing: 0.8,
       color: '#F3FDFB',
@@ -101,10 +99,10 @@ const styles = StyleSheet.create ({
     ingredientsHeading: {
       fontSize: 16,
       textAlign: "left",
-      paddingBottom:10,
       paddingTop:22,
-      paddingLeft:30,
       paddingRight:30,
+      paddingBottom:10,
+      paddingLeft:30,
       textAlign: "auto",
       letterSpacing: 1,
       fontWeight: 'bold',
@@ -115,26 +113,30 @@ const styles = StyleSheet.create ({
     ingredientsBody: {
       fontSize: 16,
       textAlign: "left",
+      paddingRight:30,
       paddingBottom:20,
       paddingLeft:30,
-      paddingRight:30,
       textAlign: "auto",
       letterSpacing: 0.6,
       color: '#F3FDFB',
       fontFamily: 'sans-serif-light',
       height:'16.5%',
     },
-    buttonsRowOne: {
+    buttonsRow: {
       flexDirection:"row",
       alignItems: 'center',
       justifyContent: 'center',
       textAlign: "center",
     },
-    buttonsRowTwo: {
-      flexDirection:"row",
-      alignItems: 'center',
-      justifyContent: 'center',
-      textAlign: "center",
+    buttonsPrimary: {
+      paddingTop: 2,
+      paddingRight: 10,
+      paddingBottom: 2,
+      paddingLeft: 10,
+    },
+    buttonsSecondary: {
+      paddingRight: 5,
+      paddingLeft: 5,
     },
   });
 
