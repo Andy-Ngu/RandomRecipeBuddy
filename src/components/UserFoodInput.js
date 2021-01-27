@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {StyleSheet, ScrollView} from 'react-native'
-import {Text, Button, TextInput, View, TouchableOpacity, Image} from 'react-native';
+import {TextInput, View, TouchableOpacity, Image} from 'react-native';
 import {withNavigation} from 'react-navigation'
 import { Ionicons } from '@expo/vector-icons';
-import Spacer from '../components/Spacer';
+import Line from '../components/Line';
 import CategoryList from '../components/CategoryList';
 
 import { CuisineData } from '../data/CuisineData';
@@ -16,7 +16,6 @@ const UserFoodInput = ({ searchText, cuisineTitle, foodTitle, ingredientsTitle, 
 
     return(
         <View>
-            <Image style={styles.logo} source={require('../assets/logo.png')}/>
             <View style={styles.searchBackground}>
                 <TextInput  
                     style={styles.userInput}
@@ -34,7 +33,9 @@ const UserFoodInput = ({ searchText, cuisineTitle, foodTitle, ingredientsTitle, 
             </View>
             <ScrollView style={styles.scrollCategories}>
                 <CategoryList foodData={CuisineData} title={cuisineTitle}/>
+                <Line/>
                 <CategoryList foodData={FoodData} title={foodTitle}/>
+                <Line/>
                 <CategoryList foodData={IngredientData} title={ingredientsTitle}/>
             </ScrollView>
         </View>
@@ -43,16 +44,8 @@ const UserFoodInput = ({ searchText, cuisineTitle, foodTitle, ingredientsTitle, 
 
 const styles = StyleSheet.create({
     scrollCategories:{
-        height: '55%',
+        height: '60%',
         width: '100%',
-    },
-    logo:{
-        paddingTop: 20,
-        marginTop: 15,
-        marginBottom: 15,
-        alignSelf: 'center',
-        width: 325,
-        height: 150,
     },
     searchBackground: {
         marginTop:15,
