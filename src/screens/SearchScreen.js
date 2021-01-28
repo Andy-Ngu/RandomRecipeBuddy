@@ -28,9 +28,9 @@ const SearchScreen = ({navigation}) => {
 const styles = StyleSheet.create({
     logo:{
         resizeMode: 'contain',
-        width: 260,
+        width: 235,
         height: 90,
-        marginLeft:30,
+        marginLeft:55,
     },
     header:{
         alignSelf: 'center',
