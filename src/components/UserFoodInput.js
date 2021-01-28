@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, ScrollView} from 'react-native'
-import {TextInput, View, TouchableOpacity, Image} from 'react-native';
+import {TextInput, View, TouchableOpacity} from 'react-native';
 import {withNavigation} from 'react-navigation'
 import { Ionicons } from '@expo/vector-icons';
 import Line from '../components/Line';
@@ -16,7 +16,7 @@ const UserFoodInput = ({ searchText, cuisineTitle, foodTitle, ingredientsTitle, 
 
     return(
         <View>
-            <View style={styles.searchBackground}>
+            <View style={styles.searchBarBackground}>
                 <TextInput  
                     style={styles.userInput}
                     placeholder={searchText}
@@ -44,17 +44,15 @@ const UserFoodInput = ({ searchText, cuisineTitle, foodTitle, ingredientsTitle, 
 
 const styles = StyleSheet.create({
     scrollCategories:{
-        height: '60%',
-        width: '100%',
+        flexGrow: 0.87
     },
-    searchBackground: {
-        marginTop:15,
+    searchBarBackground: {
         backgroundColor: '#F0EEEE',
         height: 60,
         borderRadius: 5,
         marginHorizontal:15,
         flexDirection: 'row',
-        marginBottom: 30
+        marginBottom: 15,
     },
     searchButton:{
         backgroundColor:'#98D692',
