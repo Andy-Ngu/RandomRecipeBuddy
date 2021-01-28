@@ -21,7 +21,7 @@ const DisplayResults = ({result, cuisineText, navigation, getResult}) => {
               style={styles.image} 
               />
             : <Image
-              source={require('../assets/errorNoFoodThumbnail.jpg')}
+              source={require('../assets/errorNoImage.png')}
               style={styles.image} 
               />
           }
@@ -34,7 +34,7 @@ const DisplayResults = ({result, cuisineText, navigation, getResult}) => {
           <Text numberOfLines={4} ellipsizeMode='tail' style={styles.ingredientsBody}>{ingredientsList}</Text>
           <View style={styles.buttonsRow}>
             <Spacer>
-              <Button style={styles.buttonsPrimary}icon="send" mode="contained"  onPress={() =>  openURL(result.href)}>
+              <Button style={styles.buttonsPrimary} accessibilityLabel="Recipe clicked" icon="send" mode="contained"  onPress={() =>  openURL(result.href)}>
                 See Recipe
               </Button>
             </Spacer>
