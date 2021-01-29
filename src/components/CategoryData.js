@@ -1,11 +1,16 @@
 import React from 'react';
-import {View, Image, Text,StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
+import {Card, Paragraph} from 'react-native-paper';
 
 const CategoryData = ({result}) => {
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={{ uri: result.imageUrl }}/>
-      <Text style={styles.title}>{result.foodName ? result.foodName : result.ingredients}</Text>
+      <Card style={styles.card}>
+        <Card.Cover style={styles.cardImage} source={{ uri: result.imageUrl }} />
+        <Card.Content style={styles.cardBottomRow} >
+          <Paragraph style={styles.cardText}>{result.foodName ? result.foodName : result.ingredients}</Paragraph>
+        </Card.Content>
+      </Card>
     </View>
   );
 };
@@ -15,18 +20,32 @@ const styles = StyleSheet.create({
     marginTop:10,
     marginBottom:12,
     marginLeft:14,
-    marginRight:2,
+    marginRight:10,
+    paddingBottom:10,
   },
-  image: {
-    width:80,
-    height:80,
-    borderRadius: 4,
-    borderRadius: 400 / 2,
-    marginBottom: 5,
+  card: {
+    elevation: 5,
+    height : 125,
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+    borderBottomLeftRadius: 15,
+    borderBottomRightRadius: 15,
   },
-  title:{
-    fontSize: 14,
-    alignSelf: 'center',
+  cardImage: {
+    width:135,
+    height:90,
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+  },
+  cardBottomRow:{
+    alignItems: 'center',
+    textAlign: 'center',
+    justifyContent: 'center', 
+  },
+  cardText:{
+    fontSize: 16,
+    fontWeight: 'bold',
+    paddingTop: 5,
   }
 });
 
