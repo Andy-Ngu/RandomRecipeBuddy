@@ -31,16 +31,16 @@ const CategoryList = ({title, foodData, navigation}) => {
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 20,
-    marginLeft:15,
+    fontSize: 17,
+    marginLeft:10,
     fontWeight: 'bold',
-    marginBottom: 5,
-    paddingTop: 15,
-    fontSize: 16,
+    marginBottom: 3,
+    paddingTop: 20,
     paddingLeft: 10,
+    color: 'slategray',
   },
   container: {
-    marginBottom: 10
+    marginBottom: 2
   }
 });
 

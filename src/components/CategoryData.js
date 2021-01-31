@@ -18,7 +18,6 @@ const CategoryData = ({result}) => {
 const styles = StyleSheet.create({
   container:{
     marginTop:10,
-    marginBottom:12,
     marginLeft:14,
     marginRight:10,
     paddingBottom:10,
@@ -44,7 +43,6 @@ const styles = StyleSheet.create({
   },
   cardText:{
     fontSize: 16,
-    fontWeight: 'bold',
     paddingTop: 5,
   }
 });
