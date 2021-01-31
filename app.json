@@ -4,11 +4,11 @@
     "slug": "RandomRecipeBuddy",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/appicon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splashlogo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#9298D6"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

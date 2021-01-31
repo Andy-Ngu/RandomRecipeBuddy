@@ -44,7 +44,7 @@ const UserFoodInput = ({ searchText, cuisineTitle, foodTitle, ingredientsTitle, 
 
 const styles = StyleSheet.create({
     scrollCategories:{
-        flexGrow: 0.87
+        flexGrow: 0.8
     },
     searchBarBackground: {
         backgroundColor: '#F0EEEE',
