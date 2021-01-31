@@ -14,7 +14,7 @@ const navigator = createStackNavigator(
     title: 'Home',
     headerMode: 'none',
     headerShown: false,
-    cardStyle: { backgroundColor: '#9298D6' },
+    cardStyle: { backgroundColor: '#FFF' },
     }
   });
 
