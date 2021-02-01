@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {StyleSheet, ScrollView, Text} from 'react-native'
-import {TextInput, View, TouchableOpacity} from 'react-native';
+import {View} from 'react-native';
 import {withNavigation} from 'react-navigation'
-import { Ionicons } from '@expo/vector-icons';
 import Line from '../components/Line';
 import CategoryList from '../components/CategoryList';
+import { Searchbar } from 'react-native-paper';
 
 import { CuisineData } from '../data/CuisineData';
 import { FoodData } from '../data/FoodData';
@@ -16,23 +16,22 @@ const UserFoodInput = ({ searchText, cuisineTitle, foodTitle, ingredientsTitle, 
 
     return(
         <View>
-            <View style={styles.searchBarBackground}>
-                <TextInput  
-                    style={styles.userInput}
-                    placeholder={searchText}
+            <View style={styles.searchBarContainer}>
+                <Searchbar
+                    inputStyle = {styles.searchInput}
+                    style={styles.searchBar}
+                    placeholder = {searchText}
                     value = {cuisineInput}
                     onChangeText = {setCuisineInput}
-                    autoCapitalize="none"
-                    autoCorrect={false}
+                    autoCapitalize = "none"
+                    autoCorrect = {false}
+                    onIconPress = { () => navigation.navigate('Results', {cuisineInput, ingredientsInput})}
+                    onSubmitEditing = { () => navigation.navigate('Results', {cuisineInput, ingredientsInput})}
                 />
-                <TouchableOpacity
-                    style={styles.searchButton}
-                    onPress={ () => navigation.navigate('Results', {cuisineInput, ingredientsInput})}>
-                        <Ionicons name="ios-search"  style={styles.icon}/>
-                </TouchableOpacity>
             </View>
+            
             <ScrollView style={styles.scrollCategories}>
-                <Text style={styles.header}>Search by Categories</Text>
+                <Text style={styles.categoryHeader}>Categories</Text>
                 <CategoryList foodData={CuisineData} title={cuisineTitle}/>
                 <Line/>
                 <CategoryList foodData={FoodData} title={foodTitle}/>
@@ -47,38 +46,25 @@ const styles = StyleSheet.create({
     scrollCategories:{
         flexGrow: 0.78
     },
-    header: {
-        fontSize: 17,
+    categoryHeader: {
+        fontSize: 18,
         marginLeft:10,
         fontWeight: 'bold',
-        marginBottom: 5,
+        marginBottom: 8,
         paddingTop: 10,
         paddingLeft: 10,
       },
-    searchBarBackground: {
-        backgroundColor: '#F0EEEE',
-        height: 60,
-        borderRadius: 5,
-        marginHorizontal:15,
-        flexDirection: 'row',
-        marginBottom: 15,
-    },
-    searchButton:{
-        backgroundColor:'#98D692',
-    },
-    icon: {
-        padding: 17,
-        fontSize: 25,
-        alignSelf: 'center',
-        marginHorizontal: 10,
-        color: '#fff',
-    },
-    userInput: {
-        flex: 1,
+    searchBarContainer:{
+        paddingLeft: 20,
+        paddingRight: 20,
         paddingTop: 10,
-        paddingRight: 10,
-        paddingBottom: 10,
-        paddingLeft: 10,
+        paddingBottom: 20,
+    },
+    searchBar:{
+        paddingTop: 3,
+        paddingBottom: 3,
+    },
+    searchInput: {
         backgroundColor: '#fff',
         color: '#424242',
     },
