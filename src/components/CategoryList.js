@@ -9,8 +9,8 @@ const CategoryList = ({title, foodData, navigation}) => {
   }
   else{
     return (
-      <View style={styles.container}>
-        <Text style={styles.title}>{title}</Text>
+      <View style={styles.listContainer}>
+        <Text style={styles.listTitle}>{title}</Text>
         <FlatList
           horizontal={true}
           showsHorizontalScrollIndicator={false}
@@ -30,17 +30,17 @@ const CategoryList = ({title, foodData, navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  title: {
-    fontSize: 17,
+  listTitle: {
+    fontSize: 18,
     marginLeft:10,
     fontWeight: 'bold',
     marginBottom: 3,
-    paddingTop: 20,
+    paddingTop: 10,
     paddingLeft: 10,
     color: 'slategray',
   },
-  container: {
-    marginBottom: 2
+  listContainer: {
+    marginBottom: 8
   }
 });
 

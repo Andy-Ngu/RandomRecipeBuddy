@@ -4,7 +4,7 @@ import {Card, Paragraph} from 'react-native-paper';
 
 const CategoryData = ({result}) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.dataContainer}>
       <Card style={styles.card}>
         <Card.Cover style={styles.cardImage} source={{ uri: result.imageUrl }} />
         <Card.Content style={styles.cardBottomRow} >
@@ -16,7 +16,7 @@ const CategoryData = ({result}) => {
 };
 
 const styles = StyleSheet.create({
-  container:{
+  dataContainer:{
     marginTop:10,
     marginLeft:14,
     marginRight:10,

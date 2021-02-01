@@ -7,8 +7,10 @@ const Line = () => {
 
 const styles = StyleSheet.create({
     line: {
-        borderBottomColor: 'white',
-        borderBottomWidth: 1,
+        borderBottomColor: 'gray',
+        borderBottomWidth: 1.2,
+        marginLeft: 10,
+        marginRight:10,
     }
 });
 export default Line;

@@ -16,10 +16,10 @@ const SearchScreen = ({navigation}) => {
                 />
             </View>
             <UserFoodInput
-                searchText = "Search a cuisine, food, or ingredient"
-                cuisineTitle = "Cuisine"
-                foodTitle = "Food"
-                ingredientsTitle = "Ingredient"
+                searchText = "Search for recipes"
+                cuisineTitle = "Cuisines"
+                foodTitle = "Entrees"
+                ingredientsTitle = "Ingredients"
             />
         </SafeAreaView>
         );
