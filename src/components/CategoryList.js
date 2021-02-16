@@ -31,7 +31,7 @@ const CategoryList = ({title, foodData, navigation}) => {
 
 const styles = StyleSheet.create({
   listTitle: {
-    fontSize: 18,
+    fontSize: 17,
     marginLeft:10,
     fontWeight: 'bold',
     marginBottom: 3,

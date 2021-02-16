@@ -15,7 +15,7 @@ const UserFoodInput = ({ searchText, cuisineTitle, foodTitle, ingredientsTitle, 
     const [ingredientsInput, setIngredientsInput] = useState('');
 
     return(
-        <View>
+        <View style={styles.categoriesContainer}>
             <View style={styles.searchBarContainer}>
                 <Searchbar
                     inputStyle = {styles.searchInput}
@@ -43,6 +43,23 @@ const UserFoodInput = ({ searchText, cuisineTitle, foodTitle, ingredientsTitle, 
 };
 
 const styles = StyleSheet.create({
+    categoriesContainer: {
+        zIndex: 0,
+    },
+    searchBarContainer:{
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 20,
+        paddingBottom: 20,
+    },
+    searchBar:{
+        paddingTop: 3,
+        paddingBottom: 3,
+    },
+    searchInput: {
+        backgroundColor: '#fff',
+        color: '#424242',
+    },
     scrollCategories:{
         flexGrow: 0.78
     },
@@ -54,20 +71,6 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         paddingLeft: 10,
       },
-    searchBarContainer:{
-        paddingLeft: 20,
-        paddingRight: 20,
-        paddingTop: 10,
-        paddingBottom: 20,
-    },
-    searchBar:{
-        paddingTop: 3,
-        paddingBottom: 3,
-    },
-    searchInput: {
-        backgroundColor: '#fff',
-        color: '#424242',
-    },
 });
 
 export default withNavigation(UserFoodInput);

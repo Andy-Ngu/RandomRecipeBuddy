@@ -7,7 +7,7 @@ import HeaderBar from '../components/HeaderBar';
 const SearchScreen = ({navigation}) => {
     return (
         <SafeAreaView>
-            <HeaderBar/>
+            <HeaderBar navigation={navigation}/>
             <UserFoodInput
                 searchText = "Search for recipes"
                 cuisineTitle = "Cuisines"
