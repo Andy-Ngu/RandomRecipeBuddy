@@ -1,8 +1,12 @@
 import React from 'react';
-import {StyleSheet, Image, View, Text} from 'react-native';
+import {StyleSheet, Image, View, ScrollView} from 'react-native';
 import {SafeAreaView } from 'react-native-safe-area-context';
 import SubHeaderBar from '../components/SubHeaderBar';
+import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
 import Constants from 'expo-constants';
+import PrivacyPolicy from '../data/PrivacyPolicy.json';
+import TermsOfService from '../data/TermsOfService.json';
+import TextPopUp from '../components/TextPopUp';
 
 const AboutScreen = ({navigation}) => {
     const appVersion = Constants.manifest.version ;
@@ -10,14 +14,18 @@ const AboutScreen = ({navigation}) => {
 
     return (
         <SafeAreaView style={styles.container}>
+            <Provider>
             <SubHeaderBar navigation={navigation} title={title}/>
-            <View style={styles.content}>
-                <Text style={styles.header}>Random Recipe Buddy</Text>
-                <Text style={styles.body}>App Version: {appVersion}</Text>
-                <Image style={styles.logo} source={require('../assets/spatula.png')}/>
-                <Text style={styles.body}>Made with love from Andy</Text>
-                <Text style={styles.copyright}>© 2021 Chai Bear Studios</Text>
-            </View>
+                <View style={styles.content}>
+                    <Text style={styles.header}>Random Recipe Buddy</Text>
+                    <Text style={styles.body}>App Version: {appVersion}</Text>
+                    <Image style={styles.logo} source={require('../assets/spatula.png')}/>
+                    <Text style={styles.body}>Made with love from Andy</Text>
+                    <Text style={styles.copyright}>© 2021 Chai Bear Studios</Text>
+                </View>
+                <TextPopUp popUpText = {PrivacyPolicy.data} buttonName = "Privacy Policy"/>
+                <TextPopUp popUpText = {TermsOfService.data} buttonName = "Terms of Service"/>
+            </Provider>
         </SafeAreaView>
         );
 };
@@ -25,11 +33,11 @@ const AboutScreen = ({navigation}) => {
 const styles = StyleSheet.create({
     container:{
         backgroundColor: "#FFF",
-        flex: 0.85,
+        flex: 1,
         flexDirection: 'column',
     },
     content:{
-        flex: 1,
+        flex: .8,
         justifyContent:'center',
     },
     header:{
