@@ -1,13 +1,18 @@
 import React from 'react';
-import {View, Text, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
-import {withNavigation} from 'react-navigation'
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
+import { withNavigation } from 'react-navigation';
 import CategoryData from './CategoryData';
 
-const CategoryList = ({title, foodData, navigation}) => {
-  if(!foodData.length){
+const CategoryList = ({ title, foodData, navigation }) => {
+  if (!foodData.length) {
     return null;
-  }
-  else{
+  } else {
     return (
       <View style={styles.listContainer}>
         <Text style={styles.listTitle}>{title}</Text>
@@ -16,11 +21,18 @@ const CategoryList = ({title, foodData, navigation}) => {
           showsHorizontalScrollIndicator={false}
           data={foodData}
           KeyExtractor={(result) => result.id}
-          renderItem={({item}) => {
+          renderItem={({ item }) => {
             return (
-                <TouchableOpacity onPress={() => navigation.navigate('Results', {cuisineInput: item.foodName, ingredientsInput: item.ingredients})}>
-                  <CategoryData result={item}/>
-                </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate('Results', {
+                    cuisineInput: item.foodName,
+                    ingredientsInput: item.ingredients,
+                  })
+                }
+              >
+                <CategoryData result={item} />
+              </TouchableOpacity>
             );
           }}
         />
@@ -32,7 +44,7 @@ const CategoryList = ({title, foodData, navigation}) => {
 const styles = StyleSheet.create({
   listTitle: {
     fontSize: 17,
-    marginLeft:10,
+    marginLeft: 10,
     fontWeight: 'bold',
     marginBottom: 3,
     paddingTop: 10,
@@ -40,8 +52,8 @@ const styles = StyleSheet.create({
     color: 'slategray',
   },
   listContainer: {
-    marginBottom: 8
-  }
+    marginBottom: 8,
+  },
 });
 
 export default withNavigation(CategoryList);
