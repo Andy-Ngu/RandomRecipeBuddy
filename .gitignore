@@ -14,3 +14,4 @@ web-build/
 src/.env
 google-services.json
 app.local.json
+.env
