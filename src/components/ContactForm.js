@@ -11,9 +11,11 @@ import {
   Picker,
   Button,
 } from 'native-base';
+import axios from 'axios';
+import { REACT_APP_FIREBASE_URL } from '@env';
 
 const ContactForm = () => {
-  // TODO: Connect to database or email, add better alert messages
+  // TODO: Add better alert messages
   const [emailInput, setEmailInput] = useState('');
   const [subjectInput, setSubjectInput] = useState('');
   const [messageInput, setmessageInput] = useState('');
@@ -38,12 +40,36 @@ const ContactForm = () => {
   }
 
   let submitForm = function () {
-    if (validateForm()) {
+    if (validateForm(emailInput, subjectInput, messageInput)) {
+      postResult(emailInput, subjectInput, messageInput);
       alert(
         'Thank you!' +
           '\n\n' +
           "We've received your message and will get back to you soon."
       );
+    }
+  };
+
+  const postResult = async (emailInput, subjectInput, messageInput) => {
+    const headers = { 'Content-Type': 'text/plain' };
+
+    try {
+      const params = JSON.stringify({
+        Email: emailInput,
+        Subject: subjectInput,
+        Message: messageInput,
+      });
+
+      axios({
+        method: 'post',
+        url: REACT_APP_FIREBASE_URL,
+        headers: headers,
+        data: params,
+      }).then((response) => {
+        console.log('Success');
+      });
+    } catch (err) {
+      console.log(err);
     }
   };
 
