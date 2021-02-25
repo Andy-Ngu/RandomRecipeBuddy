@@ -136,6 +136,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '100%',
+    backgroundColor: '#6770c6',
   },
   buttonText: {
     fontSize: 16,
