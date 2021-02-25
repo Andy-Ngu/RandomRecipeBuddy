@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { Button } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Card } from 'react-native-paper';
 import Spacer from '../components/Spacer';
 import {
   cleanUrl,
@@ -23,8 +24,14 @@ const DisplayResults = ({ result, cuisineText, navigation, getResult }) => {
   }
 
   return (
-    <SafeAreaView>
-      <Text style={styles.title}>{result.title}</Text>
+    <SafeAreaView style={styles.parentView}>
+      <View style={styles.cardTitleContainer}>
+        <Card style={styles.cardTitle}>
+          <Card.Content>
+            <Text style={styles.title}>{result.title}</Text>
+          </Card.Content>
+        </Card>
+      </View>
       {result.thumbnail ? (
         <Image source={{ uri: result.thumbnail }} style={styles.image} />
       ) : (
@@ -38,22 +45,28 @@ const DisplayResults = ({ result, cuisineText, navigation, getResult }) => {
       ) : (
         <Text style={styles.imageSubtext}></Text>
       )}
-      {result.ingredients ? (
-        <Text style={styles.ingredientsHeading}>Ingredients:</Text>
-      ) : (
-        <Text style={styles.ingredientsHeading}></Text>
-      )}
-      <Text
-        numberOfLines={4}
-        ellipsizeMode="tail"
-        style={styles.ingredientsBody}
-      >
-        {ingredientsList}
-      </Text>
+      <Card style={styles.cardIngredients}>
+        <Card.Content>
+          {result.ingredients ? (
+            <Text style={styles.ingredientsHeading}>Ingredients:</Text>
+          ) : (
+            <Text style={styles.ingredientsHeading}></Text>
+          )}
+          <Text
+            numberOfLines={5}
+            ellipsizeMode="tail"
+            style={styles.ingredientsBody}
+          >
+            {ingredientsList}
+          </Text>
+        </Card.Content>
+      </Card>
+
       <View style={styles.buttonsRow}>
         <Spacer>
           <Button
             style={styles.buttonsPrimary}
+            color="#6770c6"
             accessibilityLabel="Recipe clicked"
             icon="send"
             mode="contained"
@@ -67,6 +80,7 @@ const DisplayResults = ({ result, cuisineText, navigation, getResult }) => {
         <Spacer>
           <Button
             style={styles.buttonsSecondary}
+            color="#6770c6"
             accessibilityLabel="Back"
             icon="arrow-left"
             mode="contained"
@@ -78,6 +92,7 @@ const DisplayResults = ({ result, cuisineText, navigation, getResult }) => {
         <Spacer>
           <Button
             style={styles.buttonsSecondary}
+            color="#6770c6"
             accessibilityLabel="Next"
             icon="arrow-right"
             mode="contained"
@@ -93,25 +108,31 @@ const DisplayResults = ({ result, cuisineText, navigation, getResult }) => {
 
 const styles = StyleSheet.create({
   parentView: {
-    alignItems: 'center',
+    backgroundColor: '#F5F5F5',
+    height: '100%',
+  },
+  cardTitleContainer: {
     justifyContent: 'center',
-    flex: 0,
+    height: '18%',
+    width: '90%',
+    alignSelf: 'center',
+  },
+  cardTitle: {},
+  cardIngredients: {
+    height: '27%',
+    width: '90%',
+    alignSelf: 'center',
   },
   title: {
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
-    fontSize: 25,
-    paddingTop: 20,
-    paddingRight: 30,
-    paddingBottom: 20,
-    paddingLeft: 30,
+    fontSize: 23,
     fontWeight: 'bold',
     letterSpacing: 0.8,
-    color: '#F3FDFB',
+    color: '#6770c6',
     fontFamily: 'sans-serif-light',
     textTransform: 'capitalize',
-    height: '21%',
   },
   image: {
     alignSelf: 'center',
@@ -119,44 +140,41 @@ const styles = StyleSheet.create({
     width: '40%',
     borderRadius: 150 / 2,
     overflow: 'hidden',
-    borderWidth: 3,
+    borderWidth: 6,
     borderColor: 'white',
+    marginBottom: 12,
+    marginTop: 12,
   },
   imageSubtext: {
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
     fontSize: 12,
-    paddingTop: 10,
-    color: '#F3FDFB',
+    color: '#000000',
     fontFamily: 'sans-serif',
     height: '5%',
   },
   ingredientsHeading: {
     fontSize: 16,
     textAlign: 'left',
-    paddingTop: 22,
-    paddingRight: 30,
+    paddingTop: 10,
     paddingBottom: 10,
-    paddingLeft: 30,
+    paddingLeft: 10,
     textAlign: 'auto',
-    letterSpacing: 1,
+    letterSpacing: 1.2,
     fontWeight: 'bold',
-    color: '#F3FDFB',
+    color: '#6770c6',
     fontFamily: 'sans-serif-light',
-    height: '9%',
   },
   ingredientsBody: {
     fontSize: 16,
     textAlign: 'left',
-    paddingRight: 30,
-    paddingBottom: 20,
-    paddingLeft: 30,
+    paddingRight: 5,
+    paddingLeft: 10,
     textAlign: 'auto',
-    letterSpacing: 0.6,
-    color: '#F3FDFB',
+    letterSpacing: 0.4,
+    color: '#000000',
     fontFamily: 'sans-serif-light',
-    height: '16.5%',
   },
   buttonsRow: {
     flexDirection: 'row',
@@ -165,10 +183,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   buttonsPrimary: {
+    marginTop: 5,
     paddingTop: 2,
-    paddingRight: 10,
     paddingBottom: 2,
-    paddingLeft: 10,
   },
   buttonsSecondary: {
     paddingRight: 5,
