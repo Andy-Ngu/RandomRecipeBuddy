@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import SubHeaderBar from '../components/SubHeaderBar';
-import SnackBar from '../components/SnackBar';
 import ContactForm from '../components/ContactForm';
 
 const ContactScreen = ({ navigation }) => {
