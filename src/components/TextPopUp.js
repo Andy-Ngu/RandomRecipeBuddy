@@ -17,7 +17,7 @@ const TextPopUp = ({ popUpText, buttonName }) => {
           onDismiss={hideModal}
           contentContainerStyle={styles.modalContainer}
         >
-          <ScrollView>
+          <ScrollView style={styles.popUpText}>
             <Text>{popUpText}</Text>
           </ScrollView>
         </Modal>
@@ -38,6 +38,10 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 20,
+  },
+  popUpText: {
+    width: '90%',
+    alignSelf: 'center',
   },
 });
 
