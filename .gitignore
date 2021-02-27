@@ -15,3 +15,7 @@ src/.env
 google-services.json
 app.local.json
 .env
+.idea/vcs.xml
+.idea/RandomRecipeBuddy.iml
+.idea/modules.xml
+.idea/misc.xml
