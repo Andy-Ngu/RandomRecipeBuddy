@@ -15,11 +15,11 @@ const HeaderBar = ({ navigation }) => {
   const closeMenu = () => setVisible(false);
 
   return (
-    <Appbar.Header style={styles.container}>
+    <Appbar style={styles.container}>
       <Image style={styles.logo} source={require('../assets/logo.png')} />
       <Provider>
         <Menu
-          statusBarHeight={-25}
+          statusBarHeight={0}
           visible={visible}
           onDismiss={closeMenu}
           anchor={
@@ -48,28 +48,25 @@ const HeaderBar = ({ navigation }) => {
           />
         </Menu>
       </Provider>
-    </Appbar.Header>
+    </Appbar>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    alignSelf: 'center',
     backgroundColor: '#9298D6',
-    height: 60,
-    paddingBottom: 40,
-    zIndex: 1,
+    height: '12%',
   },
   logo: {
     resizeMode: 'contain',
-    width: 200,
-    height: 80,
-    marginLeft: '20.5%',
+    width: '80%',
+    height: '80%',
+    left: '42.5%',
   },
   menuButton: {
     alignSelf: 'center',
-    marginBottom: 25,
-    marginRight: 5,
+    zIndex: 1,
+    left: '5%',
   },
   menuItem: {
     height: 34,

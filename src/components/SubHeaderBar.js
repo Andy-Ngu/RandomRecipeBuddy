@@ -4,22 +4,21 @@ import { Appbar } from 'react-native-paper';
 
 const SubHeaderBar = ({ navigation, title }) => {
   return (
-    <Appbar.Header style={styles.container}>
+    <Appbar style={styles.container}>
       <Appbar.BackAction onPress={() => navigation.pop()} />
       <Appbar.Content
         style={styles.header}
         titleStyle={styles.title}
         title={title}
       />
-    </Appbar.Header>
+    </Appbar>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#9298D6',
-    height: 60,
-    paddingBottom: 40,
+    height: '14%',
   },
   header: {
     flex: 0.8,
