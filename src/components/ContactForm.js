@@ -18,7 +18,7 @@ const ContactForm = () => {
   // TODO: Add better alert messages
   const [emailInput, setEmailInput] = useState('');
   const [subjectInput, setSubjectInput] = useState('');
-  const [messageInput, setmessageInput] = useState('');
+  const [messageInput, setMessageInput] = useState('');
 
   let validateForm = function () {
     const emailError = 'Please enter a valid email';
@@ -65,7 +65,10 @@ const ContactForm = () => {
         url: REACT_APP_FIREBASE_URL,
         headers: headers,
         data: params,
-      }).then((response) => {
+      }).then(() => {
+        setEmailInput('');
+        setSubjectInput('');
+        setMessageInput('');
         console.log('Success');
       });
     } catch (err) {
@@ -92,7 +95,7 @@ const ContactForm = () => {
               rowSpan={4}
               bordered
               value={messageInput}
-              onChangeText={setmessageInput}
+              onChangeText={setMessageInput}
             />
           </Form>
         </Content>
