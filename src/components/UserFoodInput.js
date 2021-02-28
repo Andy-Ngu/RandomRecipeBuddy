@@ -40,14 +40,16 @@ const UserFoodInput = ({
         />
       </View>
 
-      <ScrollView style={styles.scrollCategories}>
-        <Text style={styles.categoryHeader}>Categories</Text>
-        <CategoryList foodData={CuisineData} title={cuisineTitle} />
-        <Line />
-        <CategoryList foodData={FoodData} title={foodTitle} />
-        <Line />
-        <CategoryList foodData={IngredientData} title={ingredientsTitle} />
-      </ScrollView>
+      <View>
+        <ScrollView style={styles.scrollCategories}>
+          <Text style={styles.categoryHeader}>Categories</Text>
+          <CategoryList foodData={CuisineData} title={cuisineTitle} />
+          <Line />
+          <CategoryList foodData={FoodData} title={foodTitle} />
+          <Line />
+          <CategoryList foodData={IngredientData} title={ingredientsTitle} />
+        </ScrollView>
+      </View>
     </View>
   );
 };
@@ -72,6 +74,7 @@ const styles = StyleSheet.create({
   },
   scrollCategories: {
     flexGrow: 0.78,
+    marginBottom: 325,
   },
   categoryHeader: {
     fontSize: 18,

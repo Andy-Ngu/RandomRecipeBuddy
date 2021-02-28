@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
   },
   cardTitle: {},
   cardIngredients: {
-    height: '27%',
+    height: '28%',
     width: '90%',
     alignSelf: 'center',
   },
@@ -157,7 +157,6 @@ const styles = StyleSheet.create({
   ingredientsHeading: {
     fontSize: 16,
     textAlign: 'left',
-    paddingTop: 10,
     paddingBottom: 10,
     paddingLeft: 10,
     textAlign: 'auto',
@@ -181,6 +180,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
+    height: '10.5%',
   },
   buttonsPrimary: {
     marginTop: 5,
