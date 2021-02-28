@@ -24,6 +24,7 @@ const CategoryList = ({ title, foodData, navigation }) => {
           renderItem={({ item }) => {
             return (
               <TouchableOpacity
+                activeOpacity={0.4}
                 onPress={() =>
                   navigation.navigate('Results', {
                     cuisineInput: item.foodName,
