@@ -23,7 +23,7 @@ const ResultsScreen = ({ navigation }) => {
           : (randNumber = 0);
       setResult(response.data.results[randNumber]);
     } catch (err) {
-      setErrorMessage('Something went wrong');
+      console.log('Something went wrong');
     }
   };
 

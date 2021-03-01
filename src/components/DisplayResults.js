@@ -17,7 +17,7 @@ const DisplayResults = ({ result, cuisineText, navigation, getResult }) => {
   if (result.href) {
     parsedUrl = cleanUrl(result.href);
     ingredientsList = replaceLastWordOccurance(
-      cleanIngredientsList(result.ingredients),
+      cleanIngredientsList(result.ingredients?.trim()),
       ',',
       ', and'
     );
@@ -28,7 +28,7 @@ const DisplayResults = ({ result, cuisineText, navigation, getResult }) => {
       <View style={styles.cardTitleContainer}>
         <Card style={styles.cardTitle}>
           <Card.Content>
-            <Text style={styles.title}>{result.title}</Text>
+            <Text style={styles.title}>{result.title?.trim()}</Text>
           </Card.Content>
         </Card>
       </View>
@@ -64,16 +64,18 @@ const DisplayResults = ({ result, cuisineText, navigation, getResult }) => {
 
       <View style={styles.buttonsRow}>
         <Spacer>
-          <Button
-            style={styles.buttonsPrimary}
-            color="#6770c6"
-            accessibilityLabel="Recipe clicked"
-            icon="send"
-            mode="contained"
-            onPress={() => openURL(result.href)}
-          >
-            See Recipe
-          </Button>
+          {result?.href?.length > 0 && (
+            <Button
+              style={styles.buttonsPrimary}
+              color="#6770c6"
+              accessibilityLabel="Recipe clicked"
+              icon="send"
+              mode="contained"
+              onPress={() => openURL(result.href)}
+            >
+              See Recipe
+            </Button>
+          )}
         </Spacer>
       </View>
       <View style={styles.buttonsRow}>
